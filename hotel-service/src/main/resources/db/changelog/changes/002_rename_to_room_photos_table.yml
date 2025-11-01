@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: rename-room-photos-table
+      author: iryna.kopchak
+      changes:
+        - renameTable:
+            oldTableName: room-photos
+            newTableName: room_photos
