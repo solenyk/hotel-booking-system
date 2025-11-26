@@ -9,7 +9,18 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - hotel_pg_data:/var/lib/postgresql/data
+  booking-service-db:
+    image: postgres:16-alpine
+    container_name: booking-service-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - booking_pg_data:/var/lib/postgresql/data
 
   keycloak:
     image: quay.io/keycloak/keycloak:25.0.2
@@ -41,5 +52,6 @@ services:
       - keycloak_data:/var/lib/postgresql/data
 
 volumes:
-  pg_data:
+  hotel_pg_data:
+  booking_pg_data:
   keycloak_data:
