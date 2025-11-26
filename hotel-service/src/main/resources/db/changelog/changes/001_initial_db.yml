@@ -1,0 +1,82 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-rooms-table
+      author: iryna.kopchak
+      changes:
+        - createTable:
+            tableName: rooms
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: number
+                  type: int
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: type
+                  type: varchar(8)
+                  constraints:
+                    nullable: false
+                    default: 'STANDARD'
+              - column:
+                  name: price_per_night
+                  type: decimal
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(9)
+                  constraints:
+                    nullable: false
+                    default: 'AVAILABLE'
+              - column:
+                  name: capacity
+                  type: int
+                  constraints:
+                    nullable: false
+                    default: 1
+              - column:
+                  name: createdAt
+                  type: datetime
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create-room-photos-table
+      author: iryna.kopchak
+      changes:
+        - createTable:
+            tableName: room-photos
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                 name: name
+                 type: varchar(50)
+                 constraints:
+                   nullable: false
+              - column:
+                  name: type
+                  type: varchar(4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data
+                  type: bytea
+                  constraints:
+                    nullable: false
+              - column:
+                 name: room_id
+                 type: int
+                 constraints:
+                   foreignKey: true
+                   nullable: false
