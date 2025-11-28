@@ -2,7 +2,6 @@ package com.kopchak.hotel.service;
 
 import com.kopchak.hotel.domain.Room;
 import com.kopchak.hotel.domain.RoomPhoto;
-import com.kopchak.hotel.domain.RoomReservationStatus;
 import com.kopchak.hotel.domain.RoomType;
 import com.kopchak.hotel.dto.CreateUpdateRoomDTO;
 import com.kopchak.hotel.dto.RoomDTO;
@@ -43,7 +42,7 @@ public class RoomService {
     }
 
     public Set<RoomDTO> searchRooms(Integer capacity, BigDecimal minPrice, BigDecimal maxPrice, RoomType type,
-                                    RoomReservationStatus status, Integer number) {
+                                    Integer number) {
         Specification<Room> spec = (root, query, cb) -> cb.conjunction();
         if (capacity != null) {
             spec = spec.and(((root, query, cb) ->
@@ -60,10 +59,6 @@ public class RoomService {
         if (type != null) {
             spec = spec.and(((root, query, cb) ->
                     cb.equal(root.get("type"), type)));
-        }
-        if (status != null) {
-            spec = spec.and(((root, query, cb) ->
-                    cb.equal(root.get("status"), status)));
         }
         if (number != null) {
             spec = spec.and((root, query, cb) ->

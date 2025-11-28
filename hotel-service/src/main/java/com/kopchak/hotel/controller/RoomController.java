@@ -1,6 +1,5 @@
 package com.kopchak.hotel.controller;
 
-import com.kopchak.hotel.domain.RoomReservationStatus;
 import com.kopchak.hotel.domain.RoomType;
 import com.kopchak.hotel.dto.CreateUpdateRoomDTO;
 import com.kopchak.hotel.dto.RoomDTO;
@@ -44,9 +43,8 @@ public class RoomController {
                                                     @RequestParam(required = false, value = "min-price") BigDecimal minPrice,
                                                     @RequestParam(required = false, value = "max-price") BigDecimal maxPrice,
                                                     @RequestParam(required = false) RoomType type,
-                                                    @RequestParam(required = false) RoomReservationStatus status,
                                                     @RequestParam(required = false) Integer number) {
-        Set<RoomDTO> searchRooms = roomService.searchRooms(capacity, minPrice, maxPrice, type, status, number);
+        Set<RoomDTO> searchRooms = roomService.searchRooms(capacity, minPrice, maxPrice, type, number);
         return ResponseEntity.ok(searchRooms);
     }
 

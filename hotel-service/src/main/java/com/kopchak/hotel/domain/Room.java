@@ -42,10 +42,6 @@ public class Room {
     @Column(name = "price_per_night")
     private BigDecimal pricePerNight;
 
-    @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private RoomReservationStatus status = RoomReservationStatus.AVAILABLE;
-
     private Integer capacity;
 
     @Column(name = "created_at")

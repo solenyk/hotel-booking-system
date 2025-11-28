@@ -1,0 +1,105 @@
+databaseChangeLog:
+  - changeSet:
+      id: initial-db
+      author: iryna.kopchak
+      changes:
+        - createTable:
+            tableName: hotel_users
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: firstname
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastname
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: varchar(20)
+        - createSequence:
+            sequenceName: bookings_id_seq
+            startValue: 1
+            incrementBy: 50
+        - createTable:
+            tableName: bookings
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueSequenceNext: bookings_id_seq
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: hotel_user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_hotel_users
+                    references: hotel_users(id)
+              - column:
+                  name: room_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(9)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: room_availability
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: room_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: int
+                  constraints:
+                    nullable: false
