@@ -8,8 +8,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -21,7 +22,7 @@ public class UserJwtAuthenticationConverter implements Converter<Jwt, UsernamePa
     public UsernamePasswordAuthenticationToken convert(Jwt jwt) {
         HotelUser hotelUser = HotelUser
                 .builder()
-                .id(jwt.getSubject())
+                .id(UUID.nameUUIDFromBytes(jwt.getSubject().getBytes(StandardCharsets.UTF_8)))
                 .email(jwt.getClaimAsString("email"))
                 .firstName(jwt.getClaimAsString("given_name"))
                 .lastName(jwt.getClaimAsString("family_name"))

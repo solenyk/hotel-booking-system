@@ -21,6 +21,7 @@ public class RoomAvailabilityJobService {
     private final RoomRepository roomRepository;
     private final RoomAvailabilityRepository roomAvailabilityRepository;
 
+    //TODO: delete old values
     @Transactional
     @Job(name = "Generate inventory for next month", retries = 5)
     public void ensureInventoryExists() {
