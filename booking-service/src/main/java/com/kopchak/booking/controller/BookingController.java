@@ -30,6 +30,9 @@ public class BookingController {
 
     private final BookingService bookingService;
 
+    //TODO: write get all available dates for room
+    //TODO: write get all rooms
+    //TODO: get all bookings
     @PostMapping("/{roomId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void createBooking(@PathVariable Integer roomId, @AuthenticationPrincipal HotelUser user,

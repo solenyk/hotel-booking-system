@@ -8,7 +8,6 @@ import com.kopchak.booking.dto.BookingDTO;
 import com.kopchak.booking.repository.BookingRepository;
 import com.kopchak.booking.repository.HotelUserRepository;
 import com.kopchak.booking.repository.RoomAvailabilityRepository;
-import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,7 @@ public class BookingService {
     private final HotelUserRepository hotelUserRepository;
     private final BookingRepository bookingRepository;
 
+    //JobRunr to do a job after 15 min to change status if not paid status
     @Transactional
     public void book(Integer roomId, HotelUser user, BookingDTO bookingDTO) {
         long dateRangeSize = bookingDTO.startDate().datesUntil(bookingDTO.endDate().plusDays(1)).count();
