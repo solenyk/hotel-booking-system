@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: rename_created_at_column_room_table
+      author: iryna.kopchak
+      changes:
+        - renameColumn:
+            tableName: rooms
+            oldColumnName: createdAt
+            newColumnName: created_at
